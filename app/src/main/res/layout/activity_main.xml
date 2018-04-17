@@ -6,16 +6,16 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:orientation="vertical"
    >
 
 
         <Button
             android:id="@+id/start_updates_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:onClick="requestLocationUpdates"
@@ -23,11 +23,11 @@
 
         <Button
             android:id="@+id/stop_updates_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
+            android:layout_marginTop="20dp"
             android:enabled="false"
             android:gravity="center"
             android:onClick="removeLocationUpdates"
@@ -35,7 +35,9 @@
 
     <TextView
         android:id="@+id/location"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content" />
 
 

@@ -14,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +23,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import org.json.JSONObject;
-
-import java.io.DataOutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 
 public class MainActivity extends AppCompatActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -37,10 +30,10 @@ public class MainActivity extends AppCompatActivity implements
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
-    private static final long UPDATE_INTERVAL = 2*60000; //60 sec
+    private static final long UPDATE_INTERVAL = 2 * 60000; //60 sec
 
 
-    private static final long FASTEST_UPDATE_INTERVAL = 2*60000;
+    private static final long FASTEST_UPDATE_INTERVAL = 2 * 60000;
 
 
     private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 5;
@@ -110,12 +103,12 @@ public class MainActivity extends AppCompatActivity implements
 
     private PendingIntent getPendingIntent() {
 
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             Intent intent = new Intent(this, LocationUpdatesBroadcastReceiver.class);
             intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
             return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        }else {
+        } else {
 
             Intent intent = new Intent(this, LocationUpdatesIntentService.class);
             intent.setAction(LocationUpdatesIntentService.ACTION_PROCESS_UPDATES);
