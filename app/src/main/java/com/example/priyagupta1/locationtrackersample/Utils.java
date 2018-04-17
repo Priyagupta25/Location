@@ -1,12 +1,12 @@
 /**
  * Copyright 2017 Google Inc. All Rights Reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,12 +35,10 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +49,7 @@ class Utils {
     final static String KEY_LOCATION_UPDATES_REQUESTED = "location-updates-requested";
     final static String KEY_LOCATION_UPDATES_RESULT = "location-update-result";
     final static String CHANNEL_ID = "channel_01";
-     static Location current_location = null;
+    static Location current_location = null;
 
     static void setRequestingLocationUpdates(Context context, boolean value) {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -125,7 +123,6 @@ class Utils {
     }
 
 
-
     static String getLocationResultTitle(Context context, List<Location> locations) {
         String numLocationsReported = context.getResources().getQuantityString(
                 R.plurals.num_locations_reported, locations.size(), locations.size());
@@ -168,19 +165,19 @@ class Utils {
     }
 
 
-    static void sendPost( List<Location> locations) {
+    static void sendPost(List<Location> locations) {
 
         final String urlAdress = "https://api.locus.sh/v1//client/test/user/candidate/location";
         final String userName = "test/candidate";
         final String password = "c00e-4764";
 
-         Location current_location = null;
+        Location current_location = null;
         for (Location location : locations) {
 
-            current_location= location;
+            current_location = location;
 
         }
-       final Location mCurrentLocation = current_location;
+        final Location mCurrentLocation = current_location;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -198,16 +195,12 @@ class Utils {
 
                     JSONObject json = new JSONObject();
                     JSONObject jsonParam = new JSONObject();
-                    jsonParam.put("lat",  String.valueOf(mCurrentLocation.getLatitude()));
-                    jsonParam.put("lng",   String.valueOf(mCurrentLocation.getLongitude()));
+                    jsonParam.put("lat", String.valueOf(mCurrentLocation.getLatitude()));
+                    jsonParam.put("lng", String.valueOf(mCurrentLocation.getLongitude()));
 
                     json.put("location", jsonParam);
 
-
-
-
                     Log.d("sendPost", json.toString());
-
 
 
                     OutputStream os = conn.getOutputStream();
@@ -217,7 +210,6 @@ class Utils {
                     writer.close();
                     os.close();
                     conn.connect();
-
 
 
                     Log.i("STATUS", String.valueOf(conn.getResponseCode()));
