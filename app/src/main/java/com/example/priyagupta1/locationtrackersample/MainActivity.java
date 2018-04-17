@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
-    private static final long UPDATE_INTERVAL = 2 * 60000; //60 sec
+    private static final long UPDATE_INTERVAL = 2 * 60000;
 
 
     private static final long FASTEST_UPDATE_INTERVAL = 2 * 60000;
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        Utils.setRequestingLocationUpdates(this, false);
         createLocationRequest();
     }
 
@@ -233,5 +234,10 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Utils.setRequestingLocationUpdates(this, false);
+        mFusedLocationClient.removeLocationUpdates(getPendingIntent());
+    }
 }
